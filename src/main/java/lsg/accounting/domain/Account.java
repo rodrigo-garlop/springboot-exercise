@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @JsonPropertyOrder({ "accountId", "accountName", "accountCurrency" })
@@ -13,7 +15,9 @@ public class Account {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long accountId;
+    @NotBlank(message = "accountName cannot be empty")
     private String accountName;
+    @NotBlank(message = "accountCurrency cannot be empty")
     private String accountCurrency;
     @ManyToOne
     @JoinColumn(name="user_id")

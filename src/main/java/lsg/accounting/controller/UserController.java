@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -55,9 +56,10 @@ public class UserController {
     @ApiOperation(value = "Add account to existing user", notes = "accountId value is ignored")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Account added"),
+            @ApiResponse(code = 400, message = "Bad request"),
             @ApiResponse(code = 404, message = "User not found") }
     )
-    public ResponseEntity<Account> addAccount(@PathVariable long userId, @RequestBody Account account) {
+    public ResponseEntity<Account> addAccount(@PathVariable long userId, @Valid @RequestBody Account account) {
         try {
             Account accountSaved  = userService.addAccount(userId, account);
             return new ResponseEntity<>(accountSaved, HttpStatus.CREATED);
