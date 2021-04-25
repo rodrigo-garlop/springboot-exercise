@@ -1,10 +1,13 @@
 package lsg.accounting.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@JsonPropertyOrder({ "userId", "userName", "accountList" })
 public class User {
 
     @Id
@@ -37,4 +40,5 @@ public class User {
     public void setAccountList(List<Account> accountList) {
         this.accountList = accountList;
     }
+
 }

@@ -2,12 +2,14 @@ package lsg.accounting.service;
 
 import lsg.accounting.domain.Account;
 import lsg.accounting.domain.User;
+import lsg.accounting.exception.UserNotFoundException;
 import lsg.accounting.repository.AccountRepository;
 import lsg.accounting.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -21,20 +23,19 @@ public class UserService {
         this.accountRepository = accountRepository;
     }
 
-    public User getUser(long userId) {
-        return this.userRepository.findById(userId).orElse(null);
+    public List<User> getUsers() {
+        List<User> users = new LinkedList<>();
+        this.userRepository.findAll().forEach(users::add);
+        return users;
     }
 
-    public User saveUser(User user) {
-        return this.userRepository.save(user);
+    public User getUser(long userId) throws UserNotFoundException {
+        return this.userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
-    public Account addAccount(long userId, Account account) {
-        Optional<User> userToAddAccount = this.userRepository.findById(userId);
-        if (userToAddAccount.isEmpty())
-            return null;
-
-        account.setUser(userToAddAccount.get());
+    public Account addAccount(long userId, Account account) throws UserNotFoundException {
+        User userToAddAccount = this.userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        account.setUser(userToAddAccount);
         return this.accountRepository.save(account);
     }
 

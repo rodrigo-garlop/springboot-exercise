@@ -2,10 +2,12 @@ package lsg.accounting.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import javax.persistence.*;
 
 @Entity
+@JsonPropertyOrder({ "accountId", "accountName", "accountCurrency" })
 public class Account {
 
     @Id
@@ -53,4 +55,5 @@ public class Account {
     public long getUserId() {
         return user.getUserId();
     }
+
 }

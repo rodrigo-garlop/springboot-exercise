@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lsg.accounting.domain.Account;
 import lsg.accounting.domain.User;
+import lsg.accounting.exception.UserNotFoundException;
 import lsg.accounting.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -23,6 +26,16 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("")
+    @ApiOperation("Get users list")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Users list")}
+    )
+    public ResponseEntity<List<User>> getUsers() {
+        return new ResponseEntity<>(this.userService.getUsers(), HttpStatus.OK);
+    }
+
+
     @GetMapping("/{userId}")
     @ApiOperation("Get user by id")
     @ApiResponses(value = {
@@ -30,27 +43,28 @@ public class UserController {
             @ApiResponse(code = 404, message = "User not found") }
             )
     public ResponseEntity<User> getUser(@PathVariable long userId) {
-        User userSearched = this.userService.getUser(userId);
-        if (userSearched == null)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
-        return new ResponseEntity<>(userSearched, HttpStatus.OK);
-    }
+        try {
+            return new ResponseEntity<>(this.userService.getUser(userId), HttpStatus.OK);
 
-    @PostMapping("")
-    @ApiOperation("Create new user")
-    @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "User created"),
-            @ApiResponse(code = 404, message = "User not found") }
-    )
-    public ResponseEntity<Long> saveUser(@RequestBody User user) {
-        User userSaved = userService.saveUser(user);
-        return new ResponseEntity<>(userSaved.getUserId(), HttpStatus.CREATED);
+        } catch (UserNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
     }
 
     @PostMapping("/{userId}/account")
-    public ResponseEntity<Long> addAccount(@PathVariable long userId, @RequestBody Account account) {
-        Account accountSaved = userService.addAccount(userId, account);
-        return new ResponseEntity<>(accountSaved.getAccountId(), HttpStatus.CREATED);
+    @ApiOperation(value = "Add account to existing user", notes = "accountId value is ignored")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Account added"),
+            @ApiResponse(code = 404, message = "User not found") }
+    )
+    public ResponseEntity<Account> addAccount(@PathVariable long userId, @RequestBody Account account) {
+        try {
+            Account accountSaved  = userService.addAccount(userId, account);
+            return new ResponseEntity<>(accountSaved, HttpStatus.CREATED);
+
+        } catch (UserNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
     }
 
 }
