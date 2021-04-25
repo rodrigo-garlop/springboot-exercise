@@ -1,8 +1,8 @@
-package lsg.accounting.service;
+package lseg.accounting.service;
 
-import lsg.accounting.domain.Account;
-import lsg.accounting.exception.AccountNotFoundException;
-import lsg.accounting.repository.AccountRepository;
+import lseg.accounting.domain.Account;
+import lseg.accounting.exception.AccountNotFoundException;
+import lseg.accounting.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

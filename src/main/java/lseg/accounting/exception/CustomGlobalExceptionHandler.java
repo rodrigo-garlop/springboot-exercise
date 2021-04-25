@@ -1,4 +1,4 @@
-package lsg.accounting.exception;
+package lseg.accounting.exception;
 
 import io.swagger.models.Response;
 import org.springframework.context.support.DefaultMessageSourceResolvable;

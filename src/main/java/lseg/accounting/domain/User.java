@@ -1,13 +1,10 @@
-package lsg.accounting.domain;
+package lseg.accounting.domain;
 
-
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@JsonPropertyOrder({ "userId", "userName", "accountList" })
 public class User {
 
     @Id

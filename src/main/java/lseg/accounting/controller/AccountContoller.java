@@ -1,11 +1,11 @@
-package lsg.accounting.controller;
+package lseg.accounting.controller;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import lsg.accounting.domain.Account;
-import lsg.accounting.exception.AccountNotFoundException;
-import lsg.accounting.service.AccountService;
+import lseg.accounting.domain.Account;
+import lseg.accounting.exception.AccountNotFoundException;
+import lseg.accounting.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
