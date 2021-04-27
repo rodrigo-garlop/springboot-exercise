@@ -17,7 +17,7 @@ Rodrigo García López (rodrigo-garlop@outlook.com)
 
 ### Running the application
 
-* Build the docker image with `docker build -t accounting:latest .`, or download it at *https://hub.docker.com/repository/docker/roogar/springboot-exercise*
-* Run docker container with `docker run -p 8080:8080 accounting`
-* Access the database at *http://localhost:8080/h2-console/*
+* Build the docker image with `docker build`, or download it with `docker pull roogar/springboot-exercise`
+* Run docker container with `docker run -p 8080:8080 roogar/springboot-exercise`
+* Access locally to the database at *http://localhost:8080/h2-console*
 * Checkout the REST API documentation at *http://localhost:8080/swagger-ui/index.html*
