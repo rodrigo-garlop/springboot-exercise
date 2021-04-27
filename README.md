@@ -1,17 +1,23 @@
-# Getting Started
+# Spring Boot REST API Exercise (Accounting system simulator)
 
-### Reference Documentation
+Rodrigo García López (rodrigo-garlop@outlook.com)
 
-For further reference, please consider the following sections:
+### Technologies 
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.4.5/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.4.5/maven-plugin/reference/html/#build-image)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.4.5/reference/htmlsingle/#boot-features-jpa-and-spring-data)
+* Java 11
+* Spring boot (REST API/JSON)
+* Swagger
+* Docker
+* Maven
+* H2DB and JPA
 
-### Guides
+### Source code
 
-The following guides illustrate how to use some features concretely:
+* Clone the repository at *https://github.com/rodrigo-garlop/springboot-exercise*
 
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+### Running the application
 
+* Build the docker image with `docker build -t accounting:latest .`, or download it at *https://hub.docker.com/repository/docker/roogar/springboot-exercise*
+* Run docker container with `docker run -p 8080:8080 accounting`
+* Access the database at *http://localhost:8080/h2-console/*
+* Checkout the REST API documentation at *http://localhost:8080/swagger-ui/index.html*

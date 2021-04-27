@@ -70,16 +70,3 @@ public class UserController {
     }
 
 }
-
-/*
-Links:
-
-
-https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
-https://dzone.com/articles/spring-boot-and-swagger-documenting-restful-servic
-https://www.springboottutorial.com/spring-boot-swagger-documentation-for-rest-services
-
-http://localhost:8080/h2-console/
-http://localhost:8080/swagger-ui/index.html
-
- */
